@@ -29,6 +29,20 @@ class Solution:
 #  方法1 执行用时 : 104 ms, 在Palindrome Number的Python3提交中击败了100.00% 的用户
 #  内存消耗 : 13.3 MB, 在Palindrome Number的Python3提交中击败了0.98% 的用户       		
         			
-
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        if x<0 :
+            return False
+        else :
+            a=str(x)
+            length=int(len(a)/2)  
+            y=a[:length]
+            a=str(x)[::-1]
+            z=a[:length]
+            if y==z:
+                return True
+            else:
+                return False
         	
-
+# 执行用时 : 176 ms, 在Palindrome Number的Python3提交中击败了100.00% 的用户
+# 内存消耗 : 13.3 MB, 在Palindrome Number的Python3提交中击败了0.98% 的用户
