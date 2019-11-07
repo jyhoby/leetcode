@@ -1,0 +1,277 @@
+﻿
+	redis
+
+1、redis安装和连接
+	1.1 redis简介
+		redis:也是一个数据库
+		数据库：
+			关系型数据库
+				数据在磁盘中存放
+			非关系型数据库
+				redis（基于内存）数据都存放在内存中，提供了持久化保存的机制
+				mongodb 
+				存放的kv：key-value 
+		
+	1.2 redis安装
+		redis：官方网站   redis.io
+		Redis官方是不支持windows的，只是 Microsoft Open Tech group 在 GitHub上开发了一个Win64的版本,项目地址是：
+		https://github.com/MicrosoftArchive/redis/releases
+		下载msi安装包：
+			安装过程一路next,默认选项即可,需要将添加环境变量、过滤防火墙选中，内存使用默认100M即可
+			
+	1.3 添加环境变量：
+		将C:\Program Files\Redis添加到环境变量path中
+		
+	1.4 启动redis
+		安装好之后通过   
+			a,cd C:\Program Files\Redis
+			b,redis-server redis.windows.conf   (启动redis)
+			
+	1.5 使用redis
+		新开一个cmd下，输入redis-cli，然后输入ping来测试是否联通redis服务器
+	
+	
+	
+	
+2、redis函数
+	五种数据类型：
+		字符串(string)、哈希(字典)、列表(list)、集合(set)、有序集合(zset)
+	
+	三种交互模式
+		a, 指令交互：在cmd窗口
+		b, 客户端交互: 可视化工具
+		c, 代码交互：python代码操作redis
+	
+	redis数据类型
+
+	指令：
+
+			获取所有key的值：
+			keys *
+		字符串 string
+		
+			set key value： (*)
+				设置key-value
+			get key ： (*)
+				获取key所对应的value
+			
+			getrange key start end:
+				字符串提取，字符串从0开始，包含start和end
+			getset key value: 
+				设置key的值，返回的是旧值，新值会设置成功
+			setex key seconds value: 
+				设置key的值，过期时间为seconds，如果存在，替换之，时间以s为单位
+			setnx key value:  (*)
+				该key不存在的时候才设置，存在不设置
+			setrange key offset value:
+				将该key对应的值从offset开始替换为value
+			strlen key: 
+				得到该key对应的值的长度
+			
+			
+			mset key1 value1 key2 value2 key3 value3
+				同时设置多个键值对
+			mget
+				一次获取多个键的值
+			msetnx
+				同时设置多个键值对，键都不存在的时候才设置
+			psetex key time value
+				设置键值对，时间以ms为单位
+				
+			incr key  (*)
+				为key对应的值增加1
+				如果key不存在，那么先创建这个key，值为0，然后设置为1
+				如果key对应的是字符串，那么报错
+			incrby key number
+				在指定的key对应的值加number
+			decr key
+				减一
+			decrby key number
+				减去指定的数量
+				
+			append key value
+				在指定的key对应的值后面追加value
+			
+				
+				
+		哈希 hash
+			{
+				name : 'zs',   #  string类型
+				name: { a:1,  b:2, c:3  }   # 字典类型
+			}
+			# obj = {name:xiaohong, age:33, sex:man}
+			hset key field value  (*)
+				给对应的key设置属性和属性值
+			hsetnx key field value (*)
+				该key中不存在的field才设置为value
+			hget key field  (*)
+				获取指定key的field属性
+			hdel key field1 field2
+				删除对应key中指定的属性
+				
+			hexists key field   (*)
+				对应的key中是否存在这个属性，存在返回1，不存在返回0
+			hgetall key  (*)
+				获取这个key对应的所有的属性和值
+			hincrby key field number
+				给这个key对应的属性值加减number
+			hincrbyfloat key field number
+				给这个key对应的属性值加减number,number可以为float值
+				
+			hkeys key  (*)
+				对应的key中所有的属性名
+			hvals key  (*)
+				对应的key中所有的值
+			hlen key   (*)
+				对应的key有多少个属性
+			hmset key field1 value1 field2 value2 ...
+				同时为key设置多个属性和属性值
+			hmget key field1 field2 ...
+				同时获取key的多个属性的值
+				
+				
+				
+		列表 list
+			# list = [1, 2, 3, 4]
+			
+			blpop 删除并获取列表中左边的第一个元素，会阻塞，直到有一个元素可用
+			brpop 删除并获取列表中右边的第一个元素，会阻塞，直到有一个元素可用			
+			
+			lpush key value1 value2  (*)
+				依次将value1和value2从左边插入到队列key中
+			lrange key start stop  (*)
+				依次的显示队列key中从start开始到stop结束的所有元素
+				start 0。。。。   stop -1代表最后一个
+			lpushx key value  (*)
+				当队列key存在的时候才往队列头部插入数据，如果队列不存在，插入失败
+			lpop key  (*)
+				弹出队列key中最左边的元素
+				
+			rpush key value1 value2   (*)
+				将value从右边插入到队列key中  
+			rpushx key value  (*)
+				将value从右边插入到队列key中，但是前提是队列key必须存在
+			rpop key   (*)
+				将队列key中最右边的元素弹出
+			rpoplpush src dst   
+				将队列src中最右边的元素插入到队列dst中的最左边
+				
+			ltrim key start stop
+				将队列中start-stop区间之外的所有元素全部干掉
+				闭区间 
+			lset key index value  (*)
+				将队列key中的第index个元素设置为value
+				下标从0开始
+			llen key  (*)
+				得到队列key中元素的个数
+			lindex key index  (*)
+				获取队列key中第index个元素
+			lrem key count value
+				count > 0   从最左边开始，干掉count个和value相等的元素
+				count < 0   从最右边开始，干掉-count个和value相等的元素
+				count = 0   干掉队列key中所有和value相等的元素
+			linsert key before|after value newvalue
+				在队列key中的value的前面或者后面插入newvalue
+			
+			
+			
+		集合 set
+			无序性、唯一性
+			
+			sadd key value1 value2 value3  (*)
+				往集合key中插入多个值
+			scard key  (*)
+				得到集合中元素的个数
+			smembers key  (*)
+				查看集合key中所有的元素
+				 
+			sdiff key1 key2 key3
+				保留key1中key2和key3没有的元素
+			sdiffstore dst key1 key2 key3
+				将这个（sdiff key1 key2 key3）的结果保留到集合dst中
+			sinter key1 key2
+				取出key1和key2的交集
+			sinterstore dst key1 key2
+				将sinter key1 key2的结果保存到集合dst中
+				
+			sismember key value  (*)
+				判断value在不在集合key中，在的话返回1，不在的话返回0
+			smove src dst value
+				将集合src中的value元素移动到集合dst中
+			spop key
+				从集合key中随机弹出一个元素
+			srandmember key count
+				count > 0 且 count < 集合元素个数:  返回你一个数组，而且数组元素唯一
+				count > 集合元素个数:返回你该集合中所有的元素
+				count < 0:返回给你-count个元素，但是不保证唯一
+				
+			srem key value1 value2
+				移除集合key中的value1和value2元素
+			sunion key1 key2
+				得到集合key1和集合key2的并集
+			sunionstore dst key1 key2
+				将集合key1和集合key2的并集保存到dst中
+				
+				
+			
+		有序集合 zset 
+		
+			zadd key score member  (*)
+				将分值为score的成员member加入到有序集合key中
+			zcard key  (*)
+				得到集合key中元素的个数
+			zcount key start stop
+				得到集合key中分值在start到stop之间的元素的个数
+			zincrby key number member
+				给集合key中指定的member元素的分值加上number
+
+			zrange key start stop [withscores]  (*)
+				显示集合中的元素
+			zrangebyscore key min max  (*)
+				按照区间去查找对应的元素   min和max   
+				【注】前面的只能写数字，肯定是大于等于，后面的可以写开区间，不写默认就是闭区间
+				0 (100   0<= 且 <100
+				0 100    0<= 且 <=100
+				默认升序排列好
+				
+			zrank key value
+				从低到高排列，下标从0开始
+				查找value在有序集合key中的排名  显示的是下标
+				
+			zrem key member1 member2
+				移除有序集合中指定的元素
+			
+			zrevrange key start stop withscores  (*)
+				查询从start到stop之间所有的元素,但是是从大到小排列
+			zrevrank key value
+				用法和zrank一样，但是是从大到小排列的顺序
+				【注】得到的是下标
+			zrevrangebyscore key max min
+				ZREVRANGEBYSCORE salary 100 30   # 逆序排列所有成员
+			zscore key member  (*)
+				返回指定成员的分数
+				
+				
+				
+		键命令
+			type key :查看键对应的数据类型
+			0-15：redis默认有16个数据库，默认是在第0个数据库中操作
+			select num:切换数据库  (*)
+			keys *：所有键   (*)
+			del key:删除键   (*)
+			EXPIRE key seconds:给指定的key添加过期时间，单位是s  (*)
+			ttl key:以秒为单位，返回这个键剩余的时间秒数  (*)
+			exists key:判断一个键是否存在  (*)
+			flushdb: 删除当前数据库中所有的键  (*)
+			flushall:删除所有数据库中的键  (*)
+	
+	
+3、redis库
+	python代码交互
+	1、安装  pip install redis
+	2、使用
+	
+	
+	
+	
+	

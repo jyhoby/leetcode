@@ -1,0 +1,391 @@
+#### 破译密码
+
+##### 排列
+
+> 概念：从n个元素中取出m(m<=n)个元素，按照一定的顺序排成一列，叫做从n个元素中取出m个元素的一个排列（Arrangement），特别地，当m=n时，这个排列被称为全排列（Permutation）
+
+```python
+'''
+需求：1 2 3 4
+假设从中取3个数字，然后对这三个数字进行排列
+'''
+#需求：从[1,2,3,4]4个数中随机取出3个数进行排列
+import itertools
+myList = list(iterator.permutations([1,2,3,4], 3))
+print(mylist)
+print(len(mylist))
+
+'''
+规律总结：
+4 - 3  24
+4 - 2  12
+4 - 1  4
+排列的可能性次数：n!/(n-m)!
+'''
+```
+
+##### 组合
+
+> 概念：从m个不同的元素中，任取n（n<=m）个元素为一组，叫做从m个不同元素中取出n个元素的进行组合。
+
+```python
+import itertools
+'''
+[1,2,3,4,5]中选取4个数的组合方式有几种？
+'''
+myList = list(itertools.combinations([1,2,3,4,5],4))
+print(myList)
+print(len(muyList))
+'''
+规律总结：
+m   n
+5   5   1
+5   4   5
+5   3   10
+5   2   10
+m!/(n!x(m-n)!)
+'''
+```
+
+##### 排列组合
+
+```python
+import itertools
+myList = list(itertools.product("0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm",repeat=6))
+#可以尝试，有可能电脑会卡住
+#多线程也不行，电脑内存不够，咋处理都白搭
+print(len(myList))
+```
+
+> 注意：但凡涉及到密码，一般都会进行加密处理，常见的加密方式有MD5，RSA，DES等。
+
+##### 疯狂破译密码
+
+> 伤敌一千自损一万的破解方式
+
+```python
+import time
+import itertools
+
+password = ("".join(x) for x in itertools.product("0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm",repeat=6))
+#print(len(myList))
+while True:
+    try:
+        str1 = next(password)
+        time.sleep(0.5)
+        print(str1)
+    except StopIteration as e:
+        break
+```
+
+#### 正则表达式
+
+##### 常用需求
+
+##### 判断QQ号
+
+> 需求：设计一个方法，传递一个QQ号，判断这个QQ号码是否合法。
+
+```python
+'''
+分析：
+1.全是数字
+2.位数：4~11
+3.第一位不能为0
+'''
+
+def checkQQ(str1):
+    #不管传入的str是否合法，我们假设是合法的
+    result = True
+    #寻找条件推翻最初的假设
+    try:
+        #判断是否全部为数字
+        num = int(str1)
+        if len(str1) >= 4 and len(str1) <= 11:
+            #判断是否以数字[0]开头
+            if str1[0] == '0':
+            	result = False
+        else:
+             result = False
+   except BaseException:
+    	result = False
+print(ckeckQQ("123284u3t95"))
+```
+
+##### 正则概述
+
+> 正则表达式（Regular Exception），使用单个字符串来描述，匹配一系列符合某个语句法则的字符串搜索模式
+>
+> 搜索模式可用于文本搜索和文本替换
+>
+> 正则表达式是由一个字符序列形成的搜索模式
+>
+> 当你在文本中搜索数据时，你可以使用搜索模式来描述你要查询的内容
+>
+> 正则表达式可以是一个简单的字符，也可以是一个复杂的模式
+>
+> 正则表达式可用于所有文本搜索和文本替换的操作。
+>
+> 在python中，通过内嵌成re模块，程序员可以直接调用来实现正则匹配，正则表达式被编译成一系列的字节码，然后由c编写的匹配引擎执行。
+
+##### 模块简介
+
+> python 自1.5版本增加了re模块，它提供Perl风格的正则表达式模式
+>
+> re模块使python语言拥有全部的正则表达式功能
+>
+> re模块提供了与这些方法功能完全一致的函数，这些函数使用一个模式的字符串作为他们的第一个参数。
+
+##### 正则表达式的元字符
+
+```python
+import re
+#匹配单个字符与数字
+r'''
+.		匹配除换行符以外的任意字符
+[0123456789] []是字符集合，表示匹配方括号中所包含的任意一个字符
+[good]	 匹配good中任意一个字符
+[a-z]	 匹配任意小写字母
+[A-Z]	 匹配任意大写字母
+[0-9]	匹配任意数字
+[0-9a-zA-Z] 匹配任意的数字和字母
+[0-9a-zA-Z_]匹配任意的数字，字母以及下划线
+[^good]		匹配除了good这几个字母以外的所有字符，中括号里的^称为脱字符，表示不匹配集合中的字符
+[^0-9]		匹配所有的非数字字符
+\d 			匹配数字，效果同[0-9]
+\D		    匹配非数字字符，效果同[^0-9]
+\w			匹配数字，字母和下划线，效果同[0-9a-zA-Z_]
+\W			匹配非数字，字母和下划线，效果同[^0-9a-zA-Z_]
+\s			匹配任意的空白符(空格、回车、换行、制表、换页)，效果同[\r\n\t\f]
+\S			匹配任意的非空白符，效果同[^\f\n\r\t]
+'''
+print(re.findall("\d","you are good1 man"))
+
+r'''
+^	首行匹配，和在[]里的^不是一个意思
+$	行尾匹配
+\A	匹配字符串开始，它和^的区别是，\A只匹配整个字符串的开头，即使在re.M模式下也不会匹配它行的行首
+\Z	匹配字符串结束，它和$的区别是，\Z只匹配整个字符串的结束，即使在re.M模式下也会匹配它行的行尾
+
+\b	匹配一个单词的边界，也就是指单词和空格的位置
+	'er\b'可以匹配never，不能匹配nerve
+	
+\B	匹配非单词边界
+'''
+print(re.search("^good","you are a good man"))
+print(re.search("man$","you are a good man"))
+
+print(re.search("^good","you are a good man",re.M))
+print(re.search("\Agood","you are a good man",re.M))
+print(re.search("man$","you are a good man",re.M))
+print(re.search("man\Z","you are a good man",re.M))
+
+print(re.search(r"er\b","never"))
+print(re.search(r"er\b","neve"))
+
+print(re.search(r"er\B","never"))
+print(re.search(r"er\B","neve"))
+'''
+说明：下方的x，y均为假设的普通字符，n，m(非负整数)，不是正则表达式的元字符
+(xyz)	匹配小括号内的xyz(作为一个整体去匹配)
+x?		匹配0个或者1个x
+x*		匹配0个或者任意多个x(.*表示匹配0个或者任意多个字符(换行符除外))
+x+		匹配至少一个x
+x{n}	匹配确定的n个x(n是一个非负整数)
+x{n,}	匹配至少n个x
+x{n,m}	匹配至少n个最多m个x，注意n<=m
+x|y		|表示或，匹配的是x或y
+'''
+
+print(re.findall(r"a?","aaa"))#非贪婪匹配，尽可能少的匹配
+print(re.findall(r"a*","aaabaa"))#贪婪匹配，尽可能多的匹配
+
+print(re.findall(r"a+","aaabaaaa"))#贪婪匹配，尽可能多的匹配
+print(re.findall(r"a{3}","aaabaaaa"))
+print(re.findall(r"a{3,}","aaabaaaa"))#贪婪匹配，尽可能多的匹配
+print(re.findall(r"a{3,6}","aaabaaaa"))
+print(re.findall(r"(a|A)n","anaabaaaAn"))
+```
+
+> 需求：提取：you...man
+
+```python
+str1 = "you are a good man,you are a nice man ,you are a great man,you are a..."
+print(re.findall(r"you.*?man",str1))
+
+'''
+*?  +?  x? 最小匹配，通常都是尽可能多的匹配，可以使用这种贪婪匹配(?:x) 类似于(xyz)，但是不表示一个组
+'''
+#注释：/* part1 */ /* part2 */
+print(re.findall(r"/*.*?/*/",r"/* part1 */ /* part2 */"))
+```
+
+#####正则表达式修饰符 - 可选标志
+> 正则表达式可以包含一些可选标志修饰符来控制匹配的模式。修饰符被指定为一个可选的标志。多个标志可以通过按位 OR(|) 它们来指定。如 re.I | re.M 被设置成 I 和 M 标志：
+
+修饰符	描述
+re.I	       使匹配对大小写不敏感
+re.L	       做本地化识别（locale-aware）匹配
+re.M	多行匹配，影响 ^ 和 $
+re.S	        使 . 匹配包括换行在内的所有字符
+re.U	         根据Unicode字符集解析字符。这个标志影响 \w, \W, \b, \B.
+re.X	         该标志通过给予你更灵活的格式以便你将正则表达式写得更易于理解。
+
+#### re模块中常用的功能函数
+
+##### complie()
+
+> 编译正则表达式模式，返回一个对象模式。（可以把那些常用的正则表达式编译成正则表达式对象，这样做的目的为了提高一点效率）
+>
+> 格式：
+>
+> re.complie(pattern,flags=0)
+>
+> pattern:编译时用的表达式字符串
+>
+> flags：编译标志位，用于修改正则表达式的匹配方式，如是否区分大小写，多行匹配等等。
+
+```python
+import re
+tt = "Tina is a good girl, she is cool, clever, and so on..."
+rr = re.compile(r'\w*oo\w*')
+print(rr.findall(tt))   #查找所有包含'oo'的单词
+
+#执行结果如下：
+#['good', 'cool']
+
+```
+
+##### match()
+
+> 决定re是否在字符串的开始的位置进行匹配
+>
+> 注意：这个方法并不是完全匹配，当pattern结束时若string还有剩余字符，仍然视为匹配成功
+>
+> 想要完全匹配可以在表达式末尾添加边界匹配符“$”
+>
+> 语法：
+>
+> re.match(pattern,string,flags=0)
+
+```python
+import re
+print(re.match("com","comww.rnfregcoomn").group())
+print(re.match("com",'Comwww.runcomoob',re.I).group())
+```
+
+##### search()函数
+
+> 语法：
+>
+> re.search(pattern,string,flags= 0)
+>
+> re.search函数会在字符串中查找模式匹配，只要找到第一个匹配然后返回，若没有找到匹配则返回None
+
+```python
+import re
+print(re.search('\dcom','www.4comrunoob.5com').group())
+#执行结果如下：
+#4com
+```
+
+##### findall()
+
+> re.findall遍历匹配，可以获取字符串中所有匹配的字符串，返回一个列表
+>
+> 语法：
+>
+> re.findall(pattern,string,flag=0)
+
+```python
+import re
+p = re.compile(r"\d+")
+print(p.findall('o1n2m3k4'))
+#执行结果如下：
+#['1', '2', '3', '4']
+
+```
+
+```python
+import re
+tt = "Tina is a good girl, she is cool, clever, and so on..."
+rr = re.compile(r'\w*oo\w*')
+print(rr.findall(tt))
+print(re.findall(r'(\w)*oo(\w)',tt))#()表示子表达式 
+#执行结果如下：
+#['good', 'cool']
+#[('g', 'd'), ('c', 'l')]
+```
+
+##### finditer()
+
+> 搜索string，返回一个顺序访问每一个匹配结果（Match对象）的迭代器，找到RE匹配的所有子串，并把他们作为一个迭代器返回。
+>
+> 语法：
+>
+> re.finditer(pattern,string,flags=0)
+
+```python
+import re
+iter = re.finditer(r'\d+','12 drumm44ers drumming, 11 ... 10 ...')
+for i in iter:
+    #print(i)
+    #print(i.group())
+    print(i.span())
+"""
+执行结果如下：
+<_sre.SRE_Match object; span=(0, 2), match='12'>
+12
+(0, 2)
+<_sre.SRE_Match object; span=(8, 10), match='44'>
+44
+```
+
+##### split()
+
+> 按照能够匹配子串将string分割后返回列表
+>
+> 可以使用re.split来分割字符串。
+>
+> 语法：
+>
+> re.split(pattern,string[,maxsplit])
+>
+> maxsplit用于指定最大的分割次数，若不指定则全部分割。
+
+```python
+import re
+print(re.split('\d+','one1two2three3four4five5'))
+#执行结果如下：
+#['one', 'two', 'three', 'four', 'five', '']
+```
+
+##### sub()
+
+> 使用re替换string中每一个匹配的子串后返回替换后的新串。
+>
+> 语法：
+>
+> re.sub(pattern,repl,string,count)
+>
+> 参数一：要匹配的字符串，参数二：要替换的字符串
+>
+> 参数三：要匹配的内容  参数四：指定替换的个数
+
+```python
+import re
+text = "Bob is a handsome boy, he is cool, clever, and so on..."
+print(re.sub(r'\s+', '-', text))
+#执行结果如下：
+#JGood-is-a-handsome-boy,-he-is-cool,-clever,-and-so-on...
+#其中第二个函数是替换后的字符串；本例中为'-'
+
+#第四个参数指替换个数。默认为0，表示每个匹配项都替换。
+```
+
+#### 注意：
+
+> 1.re.match() 与re.search()还有re.findall()区别
+>
+> re.match只匹配字符串的开始，re.search匹配整个字符串，返回第一个匹配结果，re.findall整个字符串，返回所有的匹配结果。
+
