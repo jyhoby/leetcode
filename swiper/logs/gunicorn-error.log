@@ -1,0 +1,44 @@
+[2019-09-02 20:34:45 +0800] [11068] [INFO] Starting gunicorn 19.9.0
+[2019-09-02 20:34:45 +0800] [11068] [INFO] Listening at: http://127.0.0.1:9999 (11068)
+[2019-09-02 20:34:45 +0800] [11068] [INFO] Using worker: gevent
+[2019-09-02 20:34:45 +0800] [11071] [INFO] Booting worker with pid: 11071
+[2019-09-02 20:34:46 +0800] [11072] [INFO] Booting worker with pid: 11072
+[2019-09-02 20:34:46 +0800] [11073] [INFO] Booting worker with pid: 11073
+[2019-09-02 20:34:46 +0800] [11075] [INFO] Booting worker with pid: 11075
+[2019-09-02 20:34:46 +0800] [11076] [INFO] Booting worker with pid: 11076
+[2019-09-02 20:34:46 +0800] [11077] [INFO] Booting worker with pid: 11077
+[2019-09-02 20:34:46 +0800] [11078] [INFO] Booting worker with pid: 11078
+[2019-09-02 20:34:46 +0800] [11081] [INFO] Booting worker with pid: 11081
+[2019-09-02 20:34:46 +0800] [11082] [INFO] Booting worker with pid: 11082
+[2019-09-02 20:34:46 +0800] [11083] [INFO] Booting worker with pid: 11083
+[2019-09-02 20:34:46 +0800] [11085] [INFO] Booting worker with pid: 11085
+[2019-09-02 20:34:46 +0800] [11086] [INFO] Booting worker with pid: 11086
+[2019-09-02 20:34:46 +0800] [11087] [INFO] Booting worker with pid: 11087
+[2019-09-02 20:34:46 +0800] [11088] [INFO] Booting worker with pid: 11088
+[2019-09-02 20:34:46 +0800] [11089] [INFO] Booting worker with pid: 11089
+[2019-09-02 20:34:46 +0800] [11090] [INFO] Booting worker with pid: 11090
+[2019-09-02 20:35:32 +0800] [11068] [INFO] Handling signal: term
+[2019-09-02 20:35:42 +0800] [11068] [INFO] Shutting down: Master
+[2019-09-03 09:08:27 +0800] [86981] [INFO] Starting gunicorn 19.9.0
+[2019-09-03 09:08:27 +0800] [86981] [INFO] Listening at: http://127.0.0.1:9999 (86981)
+[2019-09-03 09:08:27 +0800] [86981] [INFO] Using worker: gevent
+[2019-09-03 09:08:27 +0800] [86984] [INFO] Booting worker with pid: 86984
+[2019-09-03 09:08:27 +0800] [86985] [INFO] Booting worker with pid: 86985
+[2019-09-03 09:08:27 +0800] [86986] [INFO] Booting worker with pid: 86986
+[2019-09-03 09:08:27 +0800] [86987] [INFO] Booting worker with pid: 86987
+[2019-09-03 09:08:27 +0800] [86988] [INFO] Booting worker with pid: 86988
+[2019-09-03 09:08:27 +0800] [86992] [INFO] Booting worker with pid: 86992
+[2019-09-03 09:08:28 +0800] [86993] [INFO] Booting worker with pid: 86993
+[2019-09-03 09:08:28 +0800] [86994] [INFO] Booting worker with pid: 86994
+[2019-09-03 09:08:28 +0800] [86995] [INFO] Booting worker with pid: 86995
+[2019-09-03 09:08:28 +0800] [86996] [INFO] Booting worker with pid: 86996
+[2019-09-03 09:08:28 +0800] [86997] [INFO] Booting worker with pid: 86997
+[2019-09-03 09:08:28 +0800] [86998] [INFO] Booting worker with pid: 86998
+[2019-09-03 09:08:28 +0800] [86999] [INFO] Booting worker with pid: 86999
+[2019-09-03 09:08:28 +0800] [87000] [INFO] Booting worker with pid: 87000
+[2019-09-03 09:08:28 +0800] [87001] [INFO] Booting worker with pid: 87001
+[2019-09-03 09:08:28 +0800] [87002] [INFO] Booting worker with pid: 87002
+[2019-09-03 13:07:05 +0800] [86981] [CRITICAL] WORKER TIMEOUT (pid:86984)
+[2019-09-03 13:07:06 +0800] [32862] [INFO] Booting worker with pid: 32862
+[2019-09-03 13:54:17 +0800] [86981] [CRITICAL] WORKER TIMEOUT (pid:86985)
+[2019-09-03 13:54:18 +0800] [43898] [INFO] Booting worker with pid: 43898
