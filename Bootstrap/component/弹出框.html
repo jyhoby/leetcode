@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jQuery/node_modules/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+</head>
+<body style="margin: 180px">
+
+
+        <a id="app" class="btn btn-danger btn-lg" data-toggle="popover" data-placement="bottom">
+            弹出框
+        </a>
+        <button class="btn btn-default btn-lg" data-toggle="popover" id="btn" data-placement="bottom">简介</button>
+</body>
+</html>
+
+
+<script>
+
+    $(function () {
+
+        $('#app').popover({
+            trigger : 'hover',//鼠标以上时触发弹出提示框
+            html:true,//开启html 为true的话，data-content里就能放html代码了
+            title:"<b>企鹅</b>",
+            content:"<img src='../image/1.jpg' class='img-rounded' /><br> 企鹅能在-60℃的严寒中生活、繁殖。在陆地上，它活像身穿燕尾服的西方绅士，走起路来，一摇一摆，遇到危险，连跌带爬，狼狈不堪。可是在水里，企鹅那短小的翅膀成了一双强有力的“划桨”，游速可达每小时25-30千米。一天可游160千米。 主要以磷虾、乌贼，小鱼为食。"
+
+        });
+        $('#btn').popover({
+            trigger : 'hover',//鼠标以上时触发弹出提示框
+            html:true,//开启html 为true的话，data-content里就能放html代码了
+            title:"<b>迈克尔杰克逊</b>",
+            content:"迈克尔·杰克逊（Michael Jackson，1958年8月29日-2009年6月25日），出生于美国印第安纳州加里市，美国歌手、词曲创作人、舞蹈家、表演家、慈善家、音乐家、人道主义者、和平主义者、慈善机构创办人。杰克逊是家族的第七个孩子，他在1964年作为杰克逊五人组的成员和他的兄弟一起在职业音乐舞台上初次登台，1968年乐队与当地的一家唱片公司合作出版了第一张唱片《Big Boy》。1971年12月，发行了个人首支单曲《Got to be there》，标志着其个人独唱生涯的开始。"
+
+        });
+
+    })
+
+</script>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jQuery/node_modules/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+</head>
+<body style="margin: 60px">
+<div class="btn-group" data-toggle="buttons">
+    <label class="btn btn-primary">
+        <input type="radio" name="sex" value="男" checked>男
+    </label>
+    <label class="btn btn-primary active">
+        <input type="radio" name="sex" value="女">女
+    </label>
+</div>
+<br><br>
+<div class="btn-group" data-toggle="buttons">
+    <label class="btn btn-primary">
+        <input type="checkbox" name="fa" value="洗脚">大保健
+    </label>
+    <label class="btn btn-primary">
+        <input type="checkbox" name="fa" value="按摩">按摩
+    </label>
+    <label class="btn btn-primary">
+        <input type="checkbox" name="fa" value="篮球">篮球
+    </label>
+</div>
+<h3>上传</h3>
+<button class="btn btn-primary" data-loading="loading" id="btn" autocomplete="off">开始上传</button>
+<h3>折叠插件</h3>
+<button class="btn btn-primary" data-toggle="collapse" data-target="#cont">迈克尔·杰克逊</button>
+<div class="collapse" id="cont">
+    <div class="well">迈克尔·杰克逊（Michael Jackson，1958年8月29日-2009年6月25日），出生于美国印第安纳州加里市，美国歌手、词曲创作人、舞蹈家、表演家、慈善家、音乐家、人道主义者、和平主义者、慈善机构创办人。杰克逊是家族的第七个孩子，他在1964年作为杰克逊五人组的成员和他的兄弟一起在职业音乐舞台上初次登台，1968年乐队与当地的一家唱片公司合作出版了第一张唱片《Big Boy》。1971年12月，发行了个人首支单曲《Got to be there》，标志着其个人独唱生涯的开始。1982年12月，杰克逊音乐生涯最畅销的专辑《Thriller》发行。1987年9月，杰克逊展开个人首次全球巡演。通过舞台和视频的表演，杰克逊普及了一些像机械舞和太空步等舞蹈技术。杰克逊一生中获得了13个格莱美奖和26个全美音乐奖。在他单飞生涯中，他拥有13支美国冠军单曲。2000年吉尼斯世界纪录大全里认证他资助过39个慈善机构。</div>
+</div>
+</body>
+</html>
+
+<script>
+
+    $(function () {
+
+        $('#btn').on('click',function () {
+
+            var btns = $(this).button('loading');
+
+            setTimeout(function () {
+
+                btns.button('reset')
+            },1000)
+
+        })
+
+    })
+
+
+</script>

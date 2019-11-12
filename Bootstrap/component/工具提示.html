@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jQuery/node_modules/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+</head>
+<body style="margin: 150px">
+
+<a href="#" class="btn btn-default"  title="我是你爸爸">按钮</a>
+<!-- data-toggle="tooltip"
+   data-animation="true"
+   data-delay="100"
+   data-html="true"
+   data-placement="right"
+   -->
+
+</body>
+</html>
+
+<script>
+
+    $(function () {
+
+        $('a').tooltip({
+            /*delay:{
+                show:500,
+                hide:200
+            }*/
+        });
+
+    })
+
+</script>

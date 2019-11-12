@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jQuery/node_modules/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+</head>
+<body style="margin: 100px">
+<h3>淡出效果</h3>
+    <div class="alert alert-success fade in">  <!--淡出效果-->
+        <strong>Well done!</strong>
+        You successfully read this important alert message.
+        You successfully read this important alert message.
+        <button class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>
+    <div class="alert alert-danger fade in">
+        <strong>Well done!</strong>
+        You successfully read this important alert message.
+        You successfully read this important alert message.
+        <button class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>
+
+    <div class="alert alert-info fade in">
+        <strong>Well done!</strong>
+        You successfully read this important alert message.
+        You successfully read this important alert message.
+        <button class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>
+<h3>正常</h3>
+    <div class="alert alert-warning">
+        <strong>Well done!</strong>
+        You successfully read this important alert message.
+        You successfully read this important alert message.
+        <button class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>
+    <br>
+<h3>警告框中的链接</h3>
+    <div class="alert alert-info">
+        <strong>Well done!</strong>
+        You successfully read this <a href="#" class="alert-link">我是一个超链接</a>
+        You successfully read this important alert message.
+
+        <button class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>
+<h2>JQ中的淡出效果</h2>
+<div class="alert alert-danger fade in" id="oDiv">
+    <strong>超级严重+非常严重警告!</strong>
+    什么！！朕的大清亡了！！！！<a href="#" class="alert-link">我是一个超链接</a>
+
+
+    <button class="close" id="btn">
+        <span>&times;</span>
+    </button>
+</div>
+</body>
+</html>
+
+<script>
+
+    $(function () {
+
+        /*$('#btn').on('click',function () {
+            $('#oDiv').alert('close')
+        })
+        $('#oDiv').on('closed.bs.alert',function () {//'close 关闭前执行
+            alert('关闭后执行')
+        })*/
+
+    })
+
+
+</script>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模态框插件</title>
+    <script src="../jQuery/node_modules/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+</head>
+<body style="margin: 80px">
+<!--模态框声明-->
+<div class="modal fade" id="myModal" tabindex="-1">
+    <!--窗口声明-->
+    <div class="modal-dialog">
+        <!--内容声明-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title">迈克尔.乔丹</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Recipient:</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Message:</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary">详情...</button>
+                <button class="btn btn-primary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--data-backdrop="static"  点击空白区域无法关闭"-->
+<!----data-backdrop="false  无遮罩-->
+<!--data-keyboard="false"  Esc键不能关闭-->
+<button class="btn btn-primary" id="btn">点击弹窗</button>
+
+</body>
+</html>
+
+<script>
+
+    $(function () {
+
+        $('#btn').on('click',function () {
+            $('#myModal').modal('show')
+        });
+      /*  $('#myModal').modal()*/    //   自动加载
+        $('#myModal').modal({
+
+            show:false,
+            backdrop:static  //  false 无遮罩   backdrop="static"   点击空白区域无法关闭
+         //   keyboard:false   //Esc键不能关闭
+        });
+
+        /*$('#myModal').on('show.bs.modal',function () {
+            alert('当调用show方法时立即触发！')
+        })*/
+        $('#myModal').on('shown.bs.modal',function () {
+            alert('当调用show方法时立即触发！')
+        })
+
+
+    })
+
+</script>
+
